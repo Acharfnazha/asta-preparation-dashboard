@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Asta's Preparation Dashboard
 
-## Getting Started
+**Student:** Achraf Nazha
+**Course:** TechTalks · Assignment 02: Asta's Plan Against Lucifero
+**Branch:** `assignment-2-asta-mvp`
+**Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS v4
 
-First, run the development server:
+A single-screen web app that helps Asta follow his training plan before Lucifero arrives. It shows three training tasks with descriptions and priorities, lets him mark each one complete (and undo it), and shows how much of the plan is done as a count (`2 / 3`) and a percentage (`67%`). The percentage measures plan completion only. It is not a prediction of the fight.
+
+This is a fictional teaching scenario. Characters come from *Black Clover* by Yuki Tabata. The dashboard, tasks, and scenario were created for this assignment.
+
+## Run it locally
+
+You need Node.js 20.9 or newer.
 
 ```bash
+git clone https://github.com/Acharfnazha/asta-preparation-dashboard.git
+cd asta-preparation-dashboard
+git switch assignment-2-asta-mvp
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts: `npm run lint`, `npm run build`, `npm start` (after a build).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How it works
 
-## Learn More
+- `src/app/page.tsx` is a **Server Component** with the static content: header, threat brief, footer.
+- `src/components/training-plan.tsx` is the only **Client Component**. It needs `useState` and click handlers. It holds one piece of state, a `Set` of completed task IDs.
+- `src/lib/progress.ts` contains two pure functions reused from the POC: `toggleTask` (add or remove an ID, returning a new Set) and `calculateProgress` (count, total, and a rounded, clamped percentage). The count, percentage, card status, and progress bar are all derived from the same Set, so they always agree.
+- `src/lib/tasks.ts` contains the three predefined tasks.
 
-To learn more about Next.js, take a look at the following resources:
+## Limitations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Progress is session-only.** Refreshing the page resets every task to "Not started". This is intentional for v1 and is stated on the page.
+- Tasks are fixed: they can't be added, edited, or deleted.
+- One screen and one user. No login, database, or saved history.
+- Tested in Chromium-based browsers. Not tested with a real screen reader.
+- **Stitch:** the design was not made in Google Stitch yet, and Stitch MCP was not connected. The documented fallback is in `docs/MCP.md` and `docs/DESIGN.md`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Documents
 
-## Deploy on Vercel
+| File | Contents |
+| --- | --- |
+| [`docs/PRD.md`](docs/PRD.md) | Reviewed requirements (v1.1): user, problem, three features, acceptance criteria, scope |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | Visual decisions (colours with contrast, typography, spacing, sections), the refinement with before/after screenshots, Stitch status |
+| [`docs/MCP.md`](docs/MCP.md) | Host, client, and server roles, why Stitch MCP wasn't connected, the fallback, how to connect it |
+| [`docs/POC.md`](docs/POC.md) | Feasibility question, actual test results, observations, decision |
+| [`docs/REVIEW.md`](docs/REVIEW.md) | PRD corrections, verification results, design vs implementation, one-person test, reflection |
+| [`docs/evidence/`](docs/evidence/) | Screenshots of the POC and the MVP (before/after, desktop/mobile, keyboard focus) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Git history
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The commits follow the assignment workflow:
+
+1. `Initial Next.js starter`
+2. `Draft PRD with AI planning partner (before review)`
+3. `Review PRD: …` (the corrections listed in REVIEW.md)
+4. `Test training progress proof of concept`
+5. `Complete Asta preparation MVP`

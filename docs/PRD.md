@@ -1,6 +1,6 @@
 # PRD: Asta's Preparation Dashboard
 
-**Status:** v1.0, reviewed (see `docs/REVIEW.md` for what changed from the AI draft)
+**Status:** v1.1, reviewed. v1.0 corrected the AI draft; v1.1 changed two details during the POC and build. Both are explained in `docs/REVIEW.md`.
 **Owner:** Achraf Nazha
 **Stack:** Next.js 16 (App Router), TypeScript, Tailwind CSS v4
 
@@ -69,7 +69,7 @@ Each item can be checked by hand in the browser.
 6. The percentage never shows below 0% or above 100%.
 7. A visible label explains that the percentage measures training-plan completion and is not a prediction of the fight.
 8. All buttons can be reached with Tab and pressed with Enter or Space, and show a clearly visible focus outline.
-9. The button exposes its state to assistive technology (`aria-pressed`), and progress changes are announced through a polite live region.
+9. Each button's accessible name includes its visible label and the task, for example "Mark complete – Sword control", and every change is announced through a polite live region ("Sword control completed. 1 of 3 tasks complete, 33% of the plan."). *(v1.1: replaces `aria-pressed`, see REVIEW.md.)*
 10. At 360px wide there is no horizontal scrolling, text is readable without zooming, and buttons are at least 44px tall. The layout also works on a desktop screen.
 11. Refreshing the page resets all tasks to "Not started". The page says so.
 12. There are no buttons or links that look clickable but do nothing.
@@ -77,7 +77,8 @@ Each item can be checked by hand in the browser.
 
 ## 8. Design and accessibility requirements
 
-- **Sections, in order:** header (title + goal), Lucifero threat brief, progress summary, three task cards, short note about refresh behaviour.
+- **Sections, in order:** header (title + goal), progress summary, Lucifero threat brief, three task cards, short note about refresh behaviour. *(v1.1: progress moved before the threat brief so it is on the first screen of a phone, see DESIGN.md.)*
+- **Motion:** at most one animated element (the progress bar fill, 300ms ease-out, using `transform`). All transitions turn off when the system "reduce motion" setting is on.
 - **Palette:** dark charcoal background, warm white text, one restrained red accent for primary actions and progress. Status must not rely on colour alone: completed cards also change their text and icon.
 - **Contrast:** body text and button labels meet WCAG AA (4.5:1).
 - **Typography:** one readable sans-serif for body text, at least 16px. A condensed display font is allowed for headings only.
