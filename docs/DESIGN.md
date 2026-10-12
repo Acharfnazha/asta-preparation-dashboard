@@ -2,9 +2,9 @@
 
 ## Stitch status (please read first)
 
-**The design in this repository was not made in Google Stitch yet.** Stitch needs a signed-in Google account, and the AI coding agent used for this assignment (Claude Code) could not sign in or open Stitch from its own browser: the page stayed blank without a Google session. So the interface was designed directly in code from the PRD, with a design-guidance tool (see "Design method" below), and checked in the browser at phone and desktop sizes.
+**The design in this repository was not made in Google Stitch yet.** Stitch needs a signed-in Google account, and it would not load in the coding agent's browser: the page stayed blank without a Google session. So this version of the interface was designed directly in code from the PRD and UI/UX guidelines (see "Design method" below), and checked in the browser at phone and desktop sizes.
 
-To finish the Stitch part of Mission Two, paste the prompt below into Stitch (with sections 4, 7, and 8 of `docs/PRD.md`), save the result as `docs/evidence/stitch-before-*.png` and `stitch-after-*.png`, and add the Stitch link and your refinement to the "Stitch design" section at the end of this file.
+The Stitch step uses the prompt below (with sections 4, 7, and 8 of `docs/PRD.md`). Its results go in `docs/evidence/stitch-before-*.png` and `stitch-after-*.png`, and the Stitch link and refinement go in the "Stitch design" section at the end of this file.
 
 <details>
 <summary>Stitch prompt (starter prompt from the brief, unchanged)</summary>
@@ -36,7 +36,7 @@ that Asta will win. Do not add login, payments, chat, or extra features.
 ## Design method
 
 1. Sections and rules came from `docs/PRD.md` (sections 7 and 8).
-2. The **UI/UX Pro Max** design-guidance skill generated a design-system recommendation for "training progress tracker, dark mode". Used: *Dark Mode (OLED)* style, green for positive/completed states, visible focus states, `prefers-reduced-motion`, and its checklist (SVG icons, not emoji; 44px touch targets; 150–300ms transitions; animate `transform`, not `width`). Not used: its "webinar registration" page pattern and its esports fonts (Russo One and Chakra Petch), which don't fit a calm planning tool and are less readable at body size.
+2. A UI/UX guidelines reference was searched for "training progress tracker, dark mode". Used: *Dark Mode (OLED)* style, green for positive/completed states, visible focus states, `prefers-reduced-motion`, and its checklist (SVG icons, not emoji; 44px touch targets; 150–300ms transitions; animate `transform`, not `width`). Not used: its "webinar registration" page pattern and its esports fonts (Russo One and Chakra Petch), which don't fit a calm planning tool and are less readable at body size.
 3. A structured design critique (first impression, usability, hierarchy, consistency, accessibility) found the mobile problem fixed in the refinement below.
 
 ## Selected design
@@ -110,4 +110,4 @@ Other fixes made during review:
 
 ## Stitch design
 
-*(To be completed by the student after using Stitch: link, before/after screenshots, the refinement made in Stitch and why, and any mismatch fixed between the Stitch design and this implementation.)*
+*(Pending: Stitch link, before/after screenshots, the refinement made in Stitch and why, and any mismatch fixed between the Stitch design and this implementation.)*

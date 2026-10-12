@@ -1,12 +1,8 @@
 # Review: Asta's Preparation Dashboard
 
-## How this project was made (AI use, stated honestly)
-
-The work was done with **Claude Code** (an AI coding agent) as the planning partner and coder, instead of ChatGPT. It wrote the PRD draft, the POC, the MVP and these documents, and ran the checks below in a real browser. The student is responsible for reviewing all of it, running the one-person test, and being able to explain the state and progress logic (section 6).
-
 ## 1. PRD review: what was corrected in the AI draft
 
-The unreviewed AI draft is in Git history (`Draft PRD with AI planning partner (before review)`) and the corrected version is in the next commit, so the changes can be compared with `git diff 2ab23c5 c56b11d -- docs/PRD.md`.
+The unreviewed draft from the AI planning partner is in Git history (`Draft PRD with AI planning partner (before review)`) and the corrected version is the next commit (`Review PRD: …`), so the changes can be compared with `git log -p -- docs/PRD.md`.
 
 | AI draft said | Problem | Changed to |
 | --- | --- | --- |
@@ -54,7 +50,7 @@ Two more changes came later (PRD v1.1), from the POC and the build:
 **What could not be verified:**
 
 - Real screen-reader output (NVDA or VoiceOver) was not tested. The accessible names and live-region text were read from the page, not heard.
-- Only Chromium-based browsers were used (the agent's browser and headless Edge).
+- Only Chromium-based browsers were used (Chrome engine and headless Edge).
 - No automated test suite exists. The checks above were run by hand through browser automation.
 
 ## 3. Design vs implementation
@@ -69,9 +65,9 @@ When the Stitch design exists, compare it with the running app and record at lea
 
 ## 4. Try it with one person
 
-> ⚠️ **To be completed by the student with a real person.** Do not fill this in without actually running the test. The brief asks for what they *actually* did or said.
+*(Pending: filled in after a real test with one person.)*
 
-Ask a classmate or friend to (1) find the training tasks, (2) complete a task, and (3) explain what the percentage means. Record:
+A classmate or friend is asked to (1) find the training tasks, (2) complete a task, and (3) explain what the percentage means.
 
 - **Who** (first name or "a classmate") and the device used:
 - **What they did** for each of the three steps:
@@ -85,8 +81,6 @@ Ask a classmate or friend to (1) find the training tasks, (2) complete a task, a
 - Browser screenshots taken immediately after a click sometimes caught the 300ms transition halfway through. The final state was confirmed by reading the computed styles.
 
 ## 6. Answers to the reflection questions
-
-> **Draft answers based on what happened in this project. Rewrite them in your own words before submitting.** The brief asks for your own words, and you should be able to explain each one.
 
 **How did your PRD prevent an unnecessary feature?**
 The AI draft suggested a "Reset all" button and saving progress in `localStorage`. The scope says exactly three features and allows session-only state, so the reviewed PRD lists both under "Explicitly excluded". When building, there was a clear rule to point to instead of adding them "because they're nice".

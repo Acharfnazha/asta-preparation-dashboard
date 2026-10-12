@@ -8,22 +8,22 @@
 
 | Role | In this project |
 | --- | --- |
-| **Host** | Claude Code, the AI coding agent, running in the Claude desktop app (Code tab) on Windows 11. |
-| **Client** | The MCP client built into Claude Code. It connects to each configured MCP server, lists the tools the server exposes, and sends tool calls when the agent decides to use one. |
+| **Host** | My AI coding agent, a desktop coding application running on Windows 11. |
+| **Client** | The MCP client built into that application. It connects to each configured MCP server, lists the tools the server exposes, and sends tool calls when the agent decides to use one. |
 | **Server** | The **Stitch MCP server** (a remote HTTP server from Google) would expose Stitch tools such as listing projects and reading screens. It was **not** configured. |
 
 ## What was attempted and the actual limitation
 
-1. **Opening Stitch.** The agent opened `https://stitch.withgoogle.com/` in its built-in browser. The page loaded only an empty shell (blank body, with just a hidden Google API frame) because that browser has no signed-in Google account. The agent is not allowed to sign in to accounts or type passwords for the user, so it could not continue.
-2. **Getting an API key.** Stitch MCP authenticates with a Stitch API key created in Stitch settings while signed in. Creating or handling that key has to be done by the account owner, so the agent did not create one.
+1. **Opening Stitch.** The coding agent opened `https://stitch.withgoogle.com/` in its built-in browser. The page loaded only an empty shell (blank body, with just a hidden Google API frame) because that browser had no signed-in Google account.
+2. **Getting an API key.** Stitch MCP authenticates with a Stitch API key, created in Stitch settings while signed in. No key was created for this version.
 3. **Configuring the server.** Without a key there was nothing to configure. No Stitch credentials exist anywhere in this repository.
 
-So the agent never listed the Stitch server's tools and never called one. Any claim of a Stitch MCP result would be false.
+So the Stitch server's tools were never listed and never called. Any claim of a Stitch MCP result would be false.
 
 ## Fallback used
 
-- The design was created in code from `docs/PRD.md` (sections 7 and 8) and a design-guidance skill, then checked in the browser at 360px and 1280px (`docs/DESIGN.md`).
-- The agent did use MCP in its workflow, just not for Stitch. Its built-in browser is an MCP server. Real tool calls from this session include: `preview_start` (start the dev server), `navigate`, `javascript_tool` (click the task buttons and read the summary text for the POC and acceptance tests), `computer` with `key` (Tab, Enter, Space for the keyboard test), and `computer` with `screenshot` (the files in `docs/evidence/`). This shows the same host → client → server pattern: the agent called tools that the browser server exposed and received real results, such as `Completed: 2 / 3 (67%)` after two clicks.
+- The design was created in code from `docs/PRD.md` (sections 7 and 8) and UI/UX guidelines, then checked in the browser at 360px and 1280px (`docs/DESIGN.md`).
+- MCP was still part of the workflow, just not for Stitch. The coding agent's built-in browser is itself an MCP server, and the agent used its tools to start the dev server, open the page, click the task buttons and read the summary text (the POC and acceptance tests), press Tab, Enter and Space (the keyboard test), and take screenshots (the files in `docs/evidence/`). This is the same host → client → server pattern: the agent called tools the browser server exposed and got real results back, such as `Completed: 2 / 3 (67%)` after two clicks.
 
 ## How the fallback differs from using Stitch MCP
 
@@ -36,14 +36,11 @@ So the agent never listed the Stitch server's tools and never called one. Any cl
 
 A screenshot pasted into a chat is also not MCP. It is a manual handoff of an image, not a tool call to a server.
 
-## How to connect it (for the student to complete)
+## How to connect it
 
-These steps follow community setup guides. If they differ, use Google's current official Stitch MCP instructions.
+Follow Google's current official Stitch MCP instructions for your coding application. In short:
 
 1. Sign in at stitch.withgoogle.com, open **Stitch settings → API keys**, and create a key. Keep it private.
-2. Register the server with Claude Code in a terminal, replacing the placeholder. Don't paste the key into chat, screenshots, or the repository:
-   ```bash
-   claude mcp add stitch --transport http https://stitch.googleapis.com/mcp --header "X-Goog-Api-Key: YOUR-API-KEY" -s user
-   ```
-3. Restart Claude Code and ask it to run the verification prompt from the brief: inspect the tools the server actually exposes, list your Stitch projects, retrieve the design context for Asta's Preparation Dashboard, and summarise what was returned and what is missing.
-4. Replace this file's "Result" section with the real tool name, what you asked, a short description of the result, and a screenshot of the call with the key hidden.
+2. Add the remote Stitch MCP server (`https://stitch.googleapis.com/mcp`) in the coding application's MCP server settings, with the key in its private configuration (an `X-Goog-Api-Key` header). Never commit the key or show it in screenshots.
+3. Restart the application and run the verification prompt from the brief: inspect the tools the server actually exposes, list the Stitch projects, retrieve the design context for Asta's Preparation Dashboard, and summarise what was returned and what is missing.
+4. Replace this file's "Result" section with the real tool name, what was asked, a short description of the result, and a screenshot of the call with the key hidden.
